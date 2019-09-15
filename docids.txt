@@ -1,0 +1,5 @@
+1	clueweb12-0000tw-13-04988.txt
+2	clueweb12-0000tw-14-17002
+3	clueweb12-0000tw-14-17002.txt
+4	clueweb12-0000tw-32-07334
+5	clueweb12-0000tw-32-07334.txt
