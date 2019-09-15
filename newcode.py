@@ -116,7 +116,21 @@ def write_simple_index(simple_index):
         entry += "\n"
     fobj.write(entry)
     fobj.close()
-    print("good bye")
+
+def read_index(word, term_ids, term_index):
+    stemmer = PorterStemmer()
+    word = word.lower()
+    word = stemmer.stem(word)
+    try:
+        term_id = term_ids[word]
+        tf = term_index[term_id]['tf']
+        df = term_index[term_id]['df']
+        print("Listing for term: ", word)
+        print("TERM ID: ", term_id)
+        print("Number of docs containing term: ", df)
+        print("Term frequency in corpus: ", tf)
+    except KeyError as e:
+        print("Word not found.")
 
 ############### MAIN #################
 stop_words = read_stop_words("stoplist.txt")
@@ -137,8 +151,6 @@ for i, fname in enumerate(file_names):
     current_doc_id = doc_ids[fname]
     tokens, positions = tokenize_file(fname, stop_words)    # positions is a dictionary with keys as tokens and values as position lists
 
-    
-    
     for unique_tok in positions.keys():
         # make term ids
         if unique_tok not in term_ids.keys():
@@ -162,5 +174,5 @@ for i, fname in enumerate(file_names):
 write_term_ids(term_ids)
 write_index(term_index)
 simple_index = make_index_without_hash(term_index)
-print(term_index)
 write_simple_index(simple_index)
+read_index("Chocolate", term_ids, term_index)
